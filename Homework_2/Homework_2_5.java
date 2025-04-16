@@ -3,9 +3,9 @@ package Homework_2;
 import java.util.Scanner;
 
 public class Homework_2_5 {
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
         int a;
         if (scanner.hasNextInt()) {
             a = scanner.nextInt();
