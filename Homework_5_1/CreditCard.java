@@ -1,4 +1,4 @@
-package src.Homework_5_1;
+package Homework_5_1;
 
 public class CreditCard {
     int number;
