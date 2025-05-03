@@ -1,4 +1,4 @@
-package Homework_5_2;
+package src.Homework_5_2;
 
 public class Cashpoint {
     //кол-во банкнот разного номинала

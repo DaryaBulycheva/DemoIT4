@@ -1,4 +1,4 @@
-package Homework_5_1;
+package src.Homework_5_1;
 
 public class Main {
 
