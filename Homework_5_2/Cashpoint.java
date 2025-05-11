@@ -21,12 +21,13 @@ public class Cashpoint {
         banknote20 = banknote20 + value20;
         banknote50 = banknote50 + value50;
         banknote100 = banknote100 + value100;
-        total = banknote20 * 20 + banknote50 * 50 + banknote100 * 100 + cash;
+        total = banknote20 * 20 + banknote50 * 50 + banknote100 * 100;
     }
 
     //метод для снятия денег
     public boolean subCash(int value) {
         if (total < value) {
+            System.out.println("В банкомате недостаточно средств для снятия");
             return false;
         } else {
             int count100 = 0;
@@ -38,11 +39,17 @@ public class Cashpoint {
             }
             int count50 = 0;
             int tempbanknote50 = banknote50;
-            for (int i = 0; tempbanknote50 != 0 && value >= 50; i++) {
-                if (value == 60 || value == 80) break;
-                count50++;
-                tempbanknote50 = tempbanknote50 - 1;
-                value = value - 50;
+            int maxPossible50 = Math.min(tempbanknote50, value / 50);
+            for (int b = maxPossible50; b >= 0; b--) {
+                int remainingAfter50 = value - 50 * b;
+                if (remainingAfter50 >= 0 && remainingAfter50 % 20 == 0) {
+                    int required20 = remainingAfter50 / 20;
+                    if (required20 <= banknote20) {
+                        count50 = b;
+                        value = remainingAfter50;
+                        break;
+                    }
+                }
             }
             int tempbanknote20 = banknote20;
             int count20 = 0;
@@ -55,6 +62,7 @@ public class Cashpoint {
                 banknote100 = banknote100 - count100;
                 banknote20 = banknote20 - count20;
                 banknote50 = banknote50 - count50;
+                total = banknote20 * 20 + banknote50 * 50 + banknote100 * 100;
                 System.out.println("Выдано купюр номиналом 100 = " + count100);
                 System.out.println("Выдано купюр номиналом 50 = " + count50);
                 System.out.println("Выдано купюр номиналом 20 = " + count20);
